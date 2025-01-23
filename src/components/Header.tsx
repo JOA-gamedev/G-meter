@@ -3,6 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
+import Link from "next/link";
 
 const WalletMultiButtonDynamic = dynamic(
   async () =>
@@ -20,14 +21,14 @@ export default function Header() {
         <nav>
           <ul className="flex gap-4">
             <li>
-              <a href="/" className="hover:text-blue-400">
+              <Link href="/" className="hover:text-blue-400">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/leaderboard" className="hover:text-blue-400">
+              <Link href="/leaderboard" className="hover:text-blue-400">
                 Leaderboard
-              </a>
+              </Link>
             </li>
             <li>
               <WalletMultiButtonDynamic>
