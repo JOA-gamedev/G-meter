@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import Gauge from "@/components/Gauge";
 
 export default function Home() {
   const wallet = useWallet();
@@ -11,7 +12,7 @@ export default function Home() {
   const fetchGScore = async () => {
     if (!wallet.publicKey) return; // Ensure the wallet is connected
 
-    setLoading(true); // Show loading state
+    setLoading(true);
     try {
       const response = await fetch("/api/get-score", {
         method: "POST",
@@ -24,12 +25,12 @@ export default function Home() {
       }
 
       const data = await response.json();
-      setGScore(data.gScore); // Set the G-Score returned from the API
+      setGScore(data.gScore); // Set the G-Score
     } catch (error) {
       console.error("Failed to fetch G-Score:", error);
       alert("An error occurred while fetching your G-Score.");
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false);
     }
   };
 
@@ -53,10 +54,11 @@ export default function Home() {
               {loading ? "Fetching G-Score..." : "Get My G-Score"}
             </button>
           ) : (
-            <div className="mt-4">
-              <h2 className="text-xl font-semibold">
+            <div className="mt-4 flex flex-col items-center">
+              <Gauge value={gScore} max={100} size={200} strokeWidth={30} />
+              <p className="mt-4 text-lg font-semibold">
                 Your G-Score: {gScore}/100
-              </h2>
+              </p>
             </div>
           )}
         </div>
