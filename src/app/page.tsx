@@ -55,7 +55,13 @@ export default function Home() {
             </button>
           ) : (
             <div className="mt-4 flex flex-col items-center">
-              <Gauge value={gScore} max={100} size={200} strokeWidth={30} />
+              <Gauge
+                value={gScore}
+                max={100}
+                size={400}
+                strokeWidth={20}
+                startColor="#00bbff"
+              />
               <p className="mt-4 text-lg font-semibold">
                 Your G-Score: {gScore}/100
               </p>
