@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -8,6 +10,7 @@ interface GaugeProps {
   strokeWidth?: number; // Thickness of the gauge arc
   startColor?: string; // Start color for the progress arc
   endColor?: string; // End color for the progress arc
+  halfwayColor?: string;
   textSize?: string; // Font size for the value text
 }
 
@@ -18,6 +21,7 @@ export const Gauge: React.FC<GaugeProps> = ({
   strokeWidth = 12,
   startColor = "#4ade80", // Default start color (green-400)
   endColor = "#f87171", // Default end color (red-400)
+  halfwayColor = "#000000",
   textSize = "text-lg", // Default text size
 }) => {
   const radius = (size - strokeWidth) / 2;
@@ -97,6 +101,7 @@ export const Gauge: React.FC<GaugeProps> = ({
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor={startColor} />
+            <stop offset="50%" stopColor={halfwayColor} />
             <stop offset="100%" stopColor={endColor} />
           </linearGradient>
         </defs>

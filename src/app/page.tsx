@@ -61,6 +61,7 @@ export default function Home() {
                 size={400}
                 strokeWidth={20}
                 startColor="#00bbff"
+                halfwayColor="#fcba03"
               />
               <p className="mt-4 text-lg font-semibold">
                 Your G-Score: {gScore}/100
