@@ -43,25 +43,41 @@ export default function Home() {
           : " Connect Wallet"}
       </h1>
 
+      <button
+        onClick={fetchGScore}
+        disabled={loading}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
+      >
+        {loading ? "Fetching G-Score..." : "Get My G-Score"}
+      </button>
+
       {wallet.publicKey ? (
-        <div className="mt-6">
+        <div className="mt-[200px]">
           {gScore === null ? (
-            <button
-              onClick={fetchGScore}
-              disabled={loading}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
-            >
-              {loading ? "Fetching G-Score..." : "Get My G-Score"}
-            </button>
+            <div className="mt-4 flex flex-col items-center">
+              <Gauge
+                value={0}
+                max={100}
+                size={500}
+                strokeWidth={30}
+                startColor="#00bbff"
+                halfwayColor="#fcba03"
+                textSize="text-4xl"
+              />
+              <p className="mt-4 text-lg font-semibold">
+                Your G-Score: {gScore}/100
+              </p>
+            </div>
           ) : (
             <div className="mt-4 flex flex-col items-center">
               <Gauge
                 value={gScore}
                 max={100}
-                size={400}
-                strokeWidth={20}
+                size={500}
+                strokeWidth={30}
                 startColor="#00bbff"
                 halfwayColor="#fcba03"
+                textSize="text-4xl"
               />
               <p className="mt-4 text-lg font-semibold">
                 Your G-Score: {gScore}/100

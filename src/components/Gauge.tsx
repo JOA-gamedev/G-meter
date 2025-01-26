@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface GaugeProps {
-  value: number; // Value to display (0-100)
+  value?: number; // Value to display (0-100)
   max?: number; // Maximum value (default is 100)
   size?: number; // Diameter of the gauge in pixels
   strokeWidth?: number; // Thickness of the gauge arc
@@ -15,7 +15,7 @@ interface GaugeProps {
 }
 
 export const Gauge: React.FC<GaugeProps> = ({
-  value,
+  value = 0,
   max = 100,
   size = 150,
   strokeWidth = 12,
@@ -82,6 +82,7 @@ export const Gauge: React.FC<GaugeProps> = ({
           fill="none"
           stroke="#2d2d2d"
           strokeWidth={strokeWidth}
+          strokeLinecap="round"
         />
 
         {/* Progress Arc */}
