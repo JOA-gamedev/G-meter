@@ -10,8 +10,10 @@ interface GaugeProps {
   strokeWidth?: number; // Thickness of the gauge arc
   startColor?: string; // Start color for the progress arc
   endColor?: string; // End color for the progress arc
-  halfwayColor?: string;
+  halfwayColor?: string; // Optional color at the halfway point of the gradient
   textSize?: string; // Font size for the value text
+  showText?: boolean; // Whether to display the text inside the gauge
+  customText?: string; // Custom text to display instead of the percentage
 }
 
 export const Gauge: React.FC<GaugeProps> = ({
@@ -21,8 +23,10 @@ export const Gauge: React.FC<GaugeProps> = ({
   strokeWidth = 12,
   startColor = "#4ade80", // Default start color (green-400)
   endColor = "#f87171", // Default end color (red-400)
-  halfwayColor = "#000000",
+  halfwayColor = "#000000", // Optional halfway color
   textSize = "text-lg", // Default text size
+  showText = true, // Show text by default
+  customText = "", // No custom text by default
 }) => {
   const radius = (size - strokeWidth) / 2;
   const startAngle = -120; // Start angle for the arc
@@ -108,13 +112,17 @@ export const Gauge: React.FC<GaugeProps> = ({
         </defs>
       </svg>
 
-      {/* Value Text */}
-      <div
-        className={`absolute text-white font-bold flex items-center justify-center ${textSize}`}
-        style={{ width: size, height: size / 2 }}
-      >
-        <span>{Math.round((value / max) * 100)}%</span>
-      </div>
+      {/* Value or Custom Text */}
+      {showText && (
+        <div
+          className={`absolute text-white font-bold flex flex-col gap-4 items-center justify-center ${textSize}`}
+          style={{ width: size, height: size / 2 }}
+        >
+          <span>{customText}</span>
+          {/* <span>{Math.round((value / max) * 100) + "%"}</span> */}
+          <span>{value}</span>
+        </div>
+      )}
     </div>
   );
 };

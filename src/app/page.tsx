@@ -36,54 +36,42 @@ export default function Home() {
 
   return (
     <div className="text-center">
-      <h1 className="text-2xl font-bold mb-4">
+      {/* <h1 className="text-2xl font-bold mb-4">
         Your public wallet key:
         {wallet.publicKey
           ? ` ${wallet.publicKey.toBase58()}`
           : " Connect Wallet"}
-      </h1>
-
-      <button
-        onClick={fetchGScore}
-        disabled={loading}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
-      >
-        {loading ? "Fetching G-Score..." : "Get My G-Score"}
-      </button>
+      </h1> */}
 
       {wallet.publicKey ? (
-        <div className="mt-[200px]">
-          {gScore === null ? (
-            <div className="mt-4 flex flex-col items-center">
-              <Gauge
-                value={0}
-                max={100}
-                size={500}
-                strokeWidth={30}
-                startColor="#00bbff"
-                halfwayColor="#fcba03"
-                textSize="text-4xl"
-              />
-              <p className="mt-4 text-lg font-semibold">
-                Your G-Score: {gScore}/100
-              </p>
-            </div>
-          ) : (
-            <div className="mt-4 flex flex-col items-center">
-              <Gauge
-                value={gScore}
-                max={100}
-                size={500}
-                strokeWidth={30}
-                startColor="#00bbff"
-                halfwayColor="#fcba03"
-                textSize="text-4xl"
-              />
-              <p className="mt-4 text-lg font-semibold">
-                Your G-Score: {gScore}/100
-              </p>
-            </div>
-          )}
+        <div className="m-20 pt-20">
+          <div className="mt-4 flex flex-col items-center">
+            <Gauge
+              value={gScore || 0}
+              max={100}
+              size={500}
+              strokeWidth={30}
+              startColor="#00bbff"
+              halfwayColor="#fcba03"
+              textSize="text-4xl"
+              showText={gScore ? true : false || false}
+              customText="Top G"
+            />
+            {/* <p className="mt-4 text-lg font-semibold">
+              Your G-Score: {gScore}/100
+            </p> */}
+            {gScore === null ? (
+              <button
+                onClick={fetchGScore}
+                disabled={loading}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
+              >
+                {loading ? "Fetching G-Score..." : "Get My G-Score"}
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       ) : (
         <p className="text-gray-400">
